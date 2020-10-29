@@ -1,0 +1,50 @@
+# 生产环境 数据库配置
+spring:
+  cloud:
+    #################################
+    #   gateway相关配置
+    #################################
+    gateway:
+      ################################
+      # 配置允许跨域请求
+      ################################
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+      #    路由定义
+      routes:
+        #    正式服务器
+        - id: property
+          uri: http://192.168.88.1:8090/api/property/
+          predicates:
+            - Path=/api/property/**
+        - id: org
+          uri: http://192.168.88.1:8092/api/org/
+          predicates:
+            - Path=/api/org/**
+        - id: profit
+          uri: http://192.168.88.1:8091/api/profit/
+          predicates:
+            - Path=/api/profit/**
+        - id: wechat
+          uri: http://192.168.88.1:8093/api/wechat/
+          predicates:
+            - Path=/api/wechat/**
+
+
+org:
+  my:
+    jwt:
+      # token有效期 秒
+      effective-time: 7200
+      # 登陆调用URL
+      auth-uri: http://192.168.88.1:8090/api/property/admin/loginTest
+      # 用户基本信息URL
+      userInfo-uri: http://192.168.88.1:8090/api/property/admin/getUserInfoTest
+
+
+

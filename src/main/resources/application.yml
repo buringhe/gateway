@@ -1,0 +1,27 @@
+server:
+  port: 9099
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev #默认为开发环境
+
+#配置白名单路径
+secure:
+  ignore:
+    urls: #配置白名单路径
+      - "/doc.html"
+      - "/swagger-resources/**"
+      - "/swagger/**"
+      - "/**/v2/api-docs"
+      - "/**/*.js"
+      - "/**/*.css"
+      - "/**/*.png"
+      - "/**/*.ico"
+      - "/webjars/springfox-swagger-ui/**"
+      - "/actuator/**"
+      - "/api/*/swagger-resources/**"
+      - "/api/*/swagger-ui.html"
+      # 其他需要过滤的接口或路径
+
